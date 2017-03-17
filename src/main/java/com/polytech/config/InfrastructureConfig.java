@@ -7,10 +7,7 @@ import com.polytech.repository.PostReposit;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -25,6 +22,7 @@ import javax.sql.DataSource;
 
 @Component
 @Configuration
+@Import(SecurityConfig.class)
 @PropertySource("classpath:/applications.properties")
 public class InfrastructureConfig {
 
@@ -59,7 +57,11 @@ public class InfrastructureConfig {
     @Profile("DEV")
     public DataSource devDataSource(){
         EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
-        return embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.H2).addScript("database/create-schema.sql").build();
+        return embeddedDatabaseBuilder
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript("database/create-schema.sql")
+                .addScript("database/default-users.sql")
+                .build();
     }
 
 }

@@ -54,45 +54,39 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>What In Your Mind ?</h1>
-        <p class="lead"></p>
+        <form th:action="@{/login}" method="POST" >
+        <legend>Login</legend>
+        <table>
+            <tr>
+                <td>User:</td>
+                <td>
+                    <input type="text" name="username" value=""/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <input typ="password" name="password"/>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td colspane="2">
+                    <input name="submit" type="submit" value="Login"/>
+                </td>
+            </tr>
+
+
+        </table>
+        </form>
     </div>
 
 
-    <form method="POST" action="/share">
-        <fieldset>
-            <!-- Textarea -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="textarea"></label>
-                <div class="col-md-4">
-                    <textarea class="form-control" id="textarea" name="content" rows="8"></textarea>
-                </div>
-            </div>
-
-            <!-- Button -->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="share"></label>
-                <div class="col-md-4">
-                    <button type="submit" id="share" name="share" class="btn btn-warning">Share</button>
-                </div>
-            </div>
-
-        </fieldset>
-    </form>
 
 
-    <div class="row feed" th:each="post :${posts}">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <p th:text="${post.getContent()}"></p>
 
-                </div>
-
-            </div>
-
-        </div>
-    </div>
 
 
 </div><!-- /.container -->
