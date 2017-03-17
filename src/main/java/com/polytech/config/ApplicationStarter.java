@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ApplicationStarter {
 
     public static void main(String[] args) {
-        System.setProperty("spring.profiles.active","DEV");
+        System.setProperty("spring.profiles.active","PROD");
        SpringApplication.run(ApplicationStarter.class, args);
 
     }
