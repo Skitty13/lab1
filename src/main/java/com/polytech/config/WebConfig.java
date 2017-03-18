@@ -18,6 +18,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan("com.polytech.pnet.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+
     //configure JSP view resolver
     @Bean
     public ViewResolver viewResolver() {
