@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Import;
  */
 
 @Configuration
-@Import({InfrastructureConfig.class, WebConfig.class})
+@Import({InfrastructureConfig.class})
 @ComponentScan(basePackages= "com.polytech")
 
 public class ApplicationConfig {

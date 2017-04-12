@@ -1,4 +1,6 @@
-package com.polytech.business;
+package com.polytech.business.interfaces;
+
+import com.polytech.business.Post;
 
 import java.util.List;
 

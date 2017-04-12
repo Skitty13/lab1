@@ -1,20 +1,18 @@
-package com.polytech.config;
+package com.polytech;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Polytech Marseille
- * Created by Lucile Texier on 16/03/2017.
+ * Created by Lucile Texier on 07/04/2017.
  */
 
 @SpringBootApplication
-public class ApplicationStarter {
+public class Application {
 
     public static void main(String[] args) {
-        System.setProperty("spring.profiles.active","DEV");
-       SpringApplication.run(ApplicationStarter.class, args);
-
+        System.setProperty("spring.profiles.active", "DEV");
+        SpringApplication.run(Application.class, args);
     }
-
 }

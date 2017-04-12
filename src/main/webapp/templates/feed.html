@@ -48,15 +48,16 @@
                 <li class="active"><a href="#">Home</a></li>
 
             </ul>
-            <!-- bouton Logout -->
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Logout"/>
-            </form>
+
         </div><!--/.nav-collapse -->
     </div>
 </div>
 
 <div class="container">
+
+    <form th:action="@{/logout}" method="post">
+        <input name="logout" type="submit" value="logout"/>
+    </form>
 
     <div class="starter-template">
         <h1>What In Your Mind ?</h1>
@@ -64,7 +65,7 @@
     </div>
 
     <!--/Bouton de partage des posts -->
-    <form method="POST" th:action="@{share}">
+    <form method="POST" th:action="share">
         <fieldset>
             <!-- Textarea -->
             <div class="form-group">
@@ -78,16 +79,15 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="share"></label>
                 <div class="col-md-4">
-                    <button type="submit" id="share" name="share" class="btn btn-warning">Share</button>
+                    <button type="submit" id="share" name="share" class="btn btn-primary">Share</button>
                 </div>
             </div>
-
         </fieldset>
     </form>
 
 
     <div class="row feed" th:each="post :${posts}">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <p th:text="${post.getContent()}"></p>

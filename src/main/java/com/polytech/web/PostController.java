@@ -1,7 +1,7 @@
 package com.polytech.web;
 
 import com.polytech.business.Post;
-import com.polytech.business.PublicationService;
+import com.polytech.business.interfaces.PublicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,16 +23,16 @@ public class PostController {
     private PublicationService publicationService;
 
     @RequestMapping(value = "/feed",method = RequestMethod.GET )
-    public String feed(Model model){
+    public String fetchAllFeeds(Model model){
         List<Post> posts = publicationService.fetchAll();
         model.addAttribute("posts", posts);
         return "feed";
     }
 
     @RequestMapping(value = "/share",method = RequestMethod.POST )
-    public String post(Post post, Principal principal){
+    public String publishPost(Post post, Principal principal){
         String username= principal.getName();
         publicationService.post(post);
-        return "redirect:feed";
+        return "redirect:/feed";
     }
 }
