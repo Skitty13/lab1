@@ -1,15 +1,66 @@
-CREATE TABLE IF NOT EXISTS POST(
-            ID INT PRIMARY key AUTO_INCREMENT,
-            CONTENT VARCHAR (140)
-    );
+--
+-- Structure de la table `posts`
+--
 
-create table users(
-      username varchar_ignorecase(50) not null primary key,
-      password varchar_ignorecase(250) not null,
-      enabled boolean not null);
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` INT(5) PRIMARY KEY AUTO_INCREMENT,
+  `content` TEXT NOT NULL
+);
 
-  create table authorities (
-      username varchar_ignorecase(50) not null,
-      authority varchar_ignorecase(50) not null,
-      constraint fk_authorities_users foreign key(username) references users(username));
-      create unique index ix_auth_username on authorities (username,authority);
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` INT(5) PRIMARY KEY AUTO_INCREMENT,
+  `username` VARCHAR(25) NOT NULL,
+  `password` VARCHAR(250) NOT NULL,
+  `enabled` BOOLEAN NOT NULL
+);
+
+--
+-- Structure de la table `roles`
+--
+
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(5) PRIMARY KEY AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL
+);
+
+--
+-- Structure de la table `user_role`
+--
+
+CREATE TABLE IF NOT EXISTS `users_roles` (
+  `id` INT(10) PRIMARY KEY AUTO_INCREMENT,
+  `user_id` int(5) NOT NULL,
+  `role_id` int(5) NOT NULL,
+  CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users(id),
+  CONSTRAINT fk_role_id FOREIGN KEY (role_id) REFERENCES roles(id)
+);
+
+--
+-- Structure de la table `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` INT(11) PRIMARY KEY AUTO_INCREMENT,
+  `author_id` INT(5) NOT NULL,
+  `post_id` INT(11) NOT NULL,
+  `content` TEXT NOT NULL,
+  CONSTRAINT fk_comments_posts FOREIGN KEY (post_id) REFERENCES posts(id),
+  CONSTRAINT fk_comments_users FOREIGN KEY (author_id) REFERENCES users(id)
+);
+
+--
+-- Structure de la table `likes`
+--
+
+CREATE TABLE IF NOT EXISTS `likes` (
+  `id` INT(11) PRIMARY KEY AUTO_INCREMENT,
+  `author_id` INT(5) NOT NULL,
+  `post_id` INT(11) NOT NULL,
+  CONSTRAINT fk_likes_posts FOREIGN KEY (post_id) REFERENCES posts(id),
+  CONSTRAINT fk_likes_users FOREIGN KEY (author_id) REFERENCES users(id)
+);
+

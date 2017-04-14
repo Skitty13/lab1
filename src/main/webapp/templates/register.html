@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        <title>Poly'Tchat - Login</title>
+        <title>Poly'Tchat - Votre compte</title>
 
         <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="assets/css/main.css" rel="stylesheet"/>
@@ -43,26 +43,31 @@
             </div>
         </div>
     </div>
-
         <div class="container">
-            <form th:action="@{login}" method="POST" role="form" class="form-signin">
-                <h2 class="form-heading">Connexion</h2>
-
+            <form th:object="${userForm}" th:action="@{/register}" method="POST" role="form" class="form-signin">
+                <h2 class="form-signin-heading">Créez votre compte</h2>
                 <div class="form-group">
-                    <span th:text="${error}" class="login-error"></span>
-
-                    <input name="username" type="text" class="form-control" placeholder="Username"
-                           autofocus="true"/>
-                    <input name="password" type="password" class="form-control" placeholder="Password"/>
-
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
-                    <h4 class="text-center"><a href="/register">Créer un compte</a></h4>
+                    <input type="text" th:field="*{username}" class="form-control" placeholder="Username"
+                                autofocus="true"/>
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="login-error">Nom d'utilisateur invalide</p>
                 </div>
 
+                <div class="form-group">
+                    <input type="password" th:field="*{password}" class="form-control" placeholder="Password"/>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="login-error">Mot de passe invalide</p>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" th:field="*{passwordConfirm}" class="form-control"
+                                placeholder="Confirm your password"/>
+                    <p th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}" class="login-error">Confirmation du mot de passe impossible.</p>
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
             </form>
 
         </div>
-
+        <!-- /container -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"/>
     </body>
 </html>
